@@ -1,6 +1,15 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import {
+  column,
+  beforeSave,
+  BaseModel,
+  hasMany,
+  HasMany,
+  belongsTo,
+  BelongsTo,
+} from '@ioc:Adonis/Lucid/Orm'
+import Classroom from './Classroom'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -12,11 +21,22 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
+  @column()
+  public classroomId: number
+
   @column({ serializeAs: null })
   public password: string
 
   @column()
   public rememberMeToken?: string
+
+  @belongsTo(() => Classroom, {
+    foreignKey: 'classroomId',
+  })
+  public classroom: BelongsTo<typeof Classroom>
+
+  @hasMany(() => Classroom)
+  public classrooms: HasMany<typeof Classroom>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
