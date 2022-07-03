@@ -27,22 +27,24 @@ export default class UsersController {
     return user
   }
 
-  public async update({ params, response, request }: HttpContextContract) {
+  public async update({ params, response, request, bouncer }: HttpContextContract) {
     const user = await User.find(params.id)
     if (!user) {
       return response.badRequest('User not found')
     }
+    await bouncer.with('UserPolicy').authorize('update', user)
     const data = await request.validate(UpdateValidator)
     user.merge(data)
     await user.save()
     return user
   }
 
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response, bouncer }: HttpContextContract) {
     const user = await User.find(params.id)
     if (!user) {
       return response.badRequest('User not found')
     }
+    await bouncer.with('UserPolicy').authorize('delete', user)
     await user.delete()
   }
 }
