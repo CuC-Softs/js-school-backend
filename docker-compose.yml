@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  js_school_db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB_NAME}
+    ports:
+      - "${PG_PORT}:5432"
