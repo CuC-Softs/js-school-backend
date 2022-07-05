@@ -4,14 +4,14 @@ import Post from 'App/Models/Post'
 
 export default class PostPolicy extends BasePolicy {
 	public async update(user: User, post: Post) {
-    if(user.id === post.user.id){
+    if(user.id === post.userId){
       return true
     }
 
     return false
   }
 	public async delete(user: User, post: Post) {
-    if(user.id === post.user.id){
+    if(user.id === post.userId){
       return true
     }
 
