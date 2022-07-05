@@ -8,10 +8,18 @@ export default class PostPolicy extends BasePolicy {
       return true
     }
 
+    if(user.roles.find((role) => role.slug === 'admin')) {
+      return true
+    }
+
     return false
   }
 	public async delete(user: User, post: Post) {
     if(user.id === post.userId){
+      return true
+    }
+
+    if(user.roles.find((role) => role.slug === 'admin')) {
       return true
     }
 
