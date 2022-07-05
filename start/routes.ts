@@ -25,3 +25,12 @@ Route.get('/', async () => {
 })
 
 Route.resource('users', 'UsersController')
+
+
+Route.resource('posts', 'PostsController')
+  .apiOnly()
+  .middleware({
+    store: ['auth'],
+    destroy: ['auth'],
+    update: ['auth'],
+  })
