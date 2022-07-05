@@ -4,10 +4,12 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class StoreValidator {
   constructor(protected ctx: HttpContextContract) {}
   public schema = schema.create({
-    title: schema.string.optional({}, [
+    title: schema.string({}, [
+      rules.required(),
       rules.minLength(8),
     ]),
-    content: schema.string.optional({}, [
+    content: schema.string({}, [
+      rules.required(),
       rules.minLength(12),
     ])
   })
