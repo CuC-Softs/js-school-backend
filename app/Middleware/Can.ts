@@ -27,7 +27,7 @@ export default class Can {
     if (!user) {
       return response.unauthorized({ error: 'Must be logged in' })
     }
-    let hasRole = await this.checkHasRoles(auth.user, permissionNames)
+    let hasRole = await this.checkHasRoles(auth.user!, permissionNames)
     if (!hasRole) {
       return response.unauthorized({
         error: `Doesn't have required role(s): ${permissionNames.join(',')}`,
