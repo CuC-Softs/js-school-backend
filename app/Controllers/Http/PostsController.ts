@@ -6,7 +6,7 @@ import UpdateValidator from 'App/Validators/Post/UpdateValidator';
 export default class PostsController {
   public async index({ request }: HttpContextContract) {
     const MAX_LIMIT_PAGE: number = 100;
-    const DEFAULT_LIMIT_PAGE = 10;
+    const DEFAULT_LIMIT_PAGE: number = 10;
     const DEFAULT_PAGE: number = 1;
 
 
