@@ -22,9 +22,8 @@ export default class PostsController {
   }
 
   public async store({ request, response, auth }: HttpContextContract) {
-    const user = auth.user!
     const data = await request.validate(StoreValidator)
-    const post = await user.related('posts').create(data)
+    const post = await auth.user!.related('posts').create(data)
 
     return response.created(post)
   }
